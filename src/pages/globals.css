@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
+
+.animate-typing {
+  display: inline-block;
+  width: 0;
+  animation: typing 2s steps(20, end) forwards, blink 0.7s step-end infinite;
+}
+
+
+.container {
+  display: flex;
+  /* 使用 flex 布局使图片和文本同行 */
+  align-items: center;
+  /* 垂直居中对齐 */
+  /* gap: 10px; */
+  /* 图片与文本之间的间距 */
+  /* padding: 20px; */
+  /* 容器内边距 */
+}
+
+img {
+  width: fit-content;
+  /* 图片初始大小 */
+  height: 30px;
+  border-radius: 50%;
+  /* 圆形 */
+  object-fit: cover;
+  /* 图片适应容器 */
+  position: relative;
+  /* 确保放大时不影响布局 */
+  z-index: 1;
+  /* 控制层级 */
+  transition: transform 0.3s ease;
+  /* 平滑放大效果 */
+}
+
+img:hover {
+  transform: scale(2.5);
+  /* animation: shake 0.5s ease infinite; */
+  /* 添加抖动动画 */
+  animation: swing 0.4s ease-in-out infinite alternate;
+  /* 添加摆动动画 */
+  /* 鼠标悬停时放大1.2倍 */
+  z-index: 2;
+  /* 确保放大后覆盖其他元素 */
+}
+
+/* 其他元素示例 */
+.text {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+/* 工具提示样式 */
+img[title]:hover::after {
+  content: attr(title);
+  /* 使用 img 的 title 属性作为 tooltip 内容 */
+  position: absolute;
+  top: -30px;
+  /* tooltip 位置，显示在图片上方 */
+  left: 50%;
+  transform: translateX(-50%);
+  /* 水平居中 */
+  background-color: #333;
+  /* 背景色 */
+  color: #fff;
+  /* 文字颜色 */
+  padding: 5px 10px;
+  /* 内边距 */
+  border-radius: 4px;
+  /* 圆角 */
+  font-size: 12px;
+  /* 字体大小 */
+  white-space: nowrap;
+  /* 防止换行 */
+  z-index: 3;
+  /* 确保 tooltip 在图片之上 */
+  opacity: 0;
+  /* 默认隐藏 */
+  transition: opacity 0.3s ease;
+  /* 平滑显示 */
+}
+
+img[title]:hover::after {
+  opacity: 1;
+  /* 悬停时显示 tooltip */
+}
+
+/* 抖动动画 */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: scale(1.2) translateX(0);
+  }
+
+  25% {
+    transform: scale(1.2) translateX(-3px);
+  }
+
+  50% {
+    transform: scale(1.2) translateX(3px);
+  }
+
+  75% {
+    transform: scale(1.2) translateX(-3px);
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: scale(2) rotate(-25deg);
+  }
+
+  /* 向左摆动 */
+  100% {
+    transform: scale(2.5) rotate(15deg);
+  }
+
+  /* 向右摆动 */
+}
